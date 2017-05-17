@@ -18,3 +18,5 @@ Route::get('/', function () {
 Route::get('/gethalte', 'PenumpangController@getAllHalte');
 Route::post('/getrute', 'PenumpangController@getRute');
 Route::post('/belitiket', 'PenumpangController@buyTicket');
+Route::post('/login', 'PenumpangController@loginCheck');
+Route::post('/insert', 'PenumpangController@insertPengguna');

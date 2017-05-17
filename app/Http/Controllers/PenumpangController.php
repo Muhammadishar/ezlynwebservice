@@ -27,4 +27,38 @@ class PenumpangController extends Controller{
       if($insert) return "success";
       else return "failed";
     }
+
+    public function loginCheck(Request $request){
+      $email = $request->email;
+      $password = $request->password;
+      $check =
+      DB::table('pengguna')
+      ->join('fungsi', 'fungsi.kode_fungsi', '=', 'pengguna.kode_fungsi')
+      ->where([
+          ['email_pengguna', '=', $email],
+          ['password_pengguna', '=', $password]
+        ])
+      ->get();
+
+      if(count($check) > 0){
+        return $check;
+      }
+      else{
+        return "not found";
+      }      
+    }
+
+    public function insertPengguna(Request $request){
+      $insert =
+      DB::table('pengguna')
+      ->insert([
+        'kode_fungsi'=> $request->kode,
+        'email_pengguna' => $request->email,
+        'password_pengguna' => $request->password,
+        'nama_pengguna' => $request->nama,
+        'saldo_pengguna' => 0
+      ]);
+      if($insert) return "success";
+      else return "failed";
+    }
 }
